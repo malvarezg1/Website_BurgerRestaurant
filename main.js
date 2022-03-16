@@ -49,6 +49,7 @@ function setListenersCategories() {
 
 function renderMenu(index) {
   document.getElementById("MenuHeader").innerHTML = data_json[index].name;
+  document.getElementById("SelectedItem").innerHTML = data_json[index].name;
   document.getElementById("CheckoutContainer").style.display = "none";
   let counter = 0;
   let row;
@@ -86,6 +87,7 @@ function createCard(element, row) {
 
   column.classList.add("col-12");
   column.classList.add("col-lg-3");
+  column.classList.add("card_col");
 
   card_element.classList.add("card");
   card_image.classList.add("card-img-top");
@@ -102,7 +104,7 @@ function createCard(element, row) {
     addProductToCart(element);
   };
   card_image.setAttribute("src", element.image);
-  card_element.setAttribute("style", "width: 18rem");
+  card_element.setAttribute("style", "width: auto");
 
   card_strong.appendChild(price);
   card_price.appendChild(card_strong);
