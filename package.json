@@ -16,8 +16,5 @@
   "bugs": {
     "url": "https://github.com/malvarezg1/web_parcial1/issues"
   },
-  "homepage": "https://github.com/malvarezg1/web_parcial1#readme",
-  "dependencies": {
-    "bootstrap-icons": "^1.8.1"
-  }
+  "homepage": "https://github.com/malvarezg1/web_parcial1#readme"
 }

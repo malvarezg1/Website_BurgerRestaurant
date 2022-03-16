@@ -1,0 +1,39 @@
+h1{
+    padding-left: 2em;
+    font-family: 'Rochester', cursive;
+}
+.nav-item{
+    color: white;
+    padding-top: 1em;
+    padding-left: 2em;
+    padding-bottom: 1em;   
+} 
+
+.product-row{
+    padding-top:30px;
+}
+
+.card{
+    height: 100%; 
+  }
+
+.card-img-top{
+    padding: 20px;
+    height: 200px;
+    object-fit: cover;
+}
+.card-button{
+    color: black;
+    border-color: #CCCCCC;
+    background-color: #F2A950;
+    border-radius: 0px;
+}
+
+#Banner{
+    height: 400px;
+    object-fit: cover;
+}
+
+#MenuHeaderContainer{
+    border-color: white white black white ;
+}
