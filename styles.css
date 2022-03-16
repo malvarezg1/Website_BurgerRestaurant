@@ -1,5 +1,4 @@
 h1{
-    padding-left: 2em;
     font-family: 'Rochester', cursive;
 }
 .nav-item{
@@ -29,11 +28,71 @@ h1{
     border-radius: 0px;
 }
 
+.checkout-button{
+    font-size: 20px;
+    color: white;
+    background-color: #F2A950;
+    width: 40px;
+    height: 40px;
+    margin-right: 1em;
+}
+
+hr { width:100%; height:7px; background: black}
+
+
+#cart{
+    padding-top: 1em;
+    width: 50px;
+    height: 50px;
+}
+
 #Banner{
+    padding-top: 0.5em;
     height: 400px;
     object-fit: cover;
 }
 
 #MenuHeaderContainer{
     border-color: white white black white ;
+}
+
+#ContactInfo{
+    padding-top: 2em;
+}
+
+#CanelConfirmationBtn{
+    margin-top: 1em;
+}
+
+#OrderContinueBtn{
+    margin-top: 1em;
+}
+
+.popup-wrapper {
+    display: none;
+    background: rgba(0, 0, 0, 0.5);
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+ 
+.popup {
+    width: 100%;
+    max-width: 600px;
+    background: white;
+    margin: 10% auto;
+    padding: 20px;
+    position: relative;
+}
+ 
+.popup a {
+    background: salmon;
+    color: white;
+    text-decoration: none;
+    padding: 6px 10px;
+    margin: 30px auto;
+    display: block;
+    width: 50%;
 }

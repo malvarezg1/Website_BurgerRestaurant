@@ -6,9 +6,12 @@ let categoriesListenes = Array();
 let products_cart = Array();
 let num_products_cart = 0;
 
+const logo = document.querySelector("h1").onclick = () =>{
+    renderMenu(0);
+};
+
 recoverData(url, (data) => {
   data_json = data;
-  console.log(data_json);
   renderCatergories(data_json);
   setListenersCategories();
   renderMenu(0);
@@ -46,7 +49,7 @@ function setListenersCategories() {
 
 function renderMenu(index) {
   document.getElementById("MenuHeader").innerHTML = data_json[index].name;
-  document.getElementById("OrderTable").style.display = "none";
+  document.getElementById("CheckoutContainer").style.display = "none";
   let counter = 0;
   let row;
   let menu_container = document.getElementById("MenuContainer");
@@ -121,6 +124,14 @@ function addProductToCart(product) {
   document.getElementById("ItemCounter").innerHTML = num_products_cart + " Items";
 }
 
+function removeProductFromCart(product){
+    let removed =products_cart.splice(products_cart.indexOf(product),1)
+    if(removed){
+        num_products_cart--;
+        document.getElementById("ItemCounter").innerHTML = num_products_cart + " Items";
+    }
+}
+
 document.getElementById("cart").onclick = () =>{
 renderCheckOut()
 }
@@ -128,11 +139,14 @@ renderCheckOut()
 function renderCheckOut(){
     document.getElementById("MenuHeader").innerHTML="ORDER DETAIL"
     document.getElementById("MenuContainer").innerHTML=""
-    document.getElementById("OrderTable").style.display = "";
-    document.getElementById("OrderTable").style.display = "";
-    let count = 1;
-    let order_summary = summarizeOrder()
-    products_cart.forEach((product) =>{
+    document.getElementById("CheckoutContainer").style.display = "";
+
+    let table_body = document.getElementById("OrderTableBody")
+    table_body.innerHTML = ""
+
+    let order_summary = summarizeOrder(products_cart)
+    let total =0;
+    order_summary.forEach((product) =>{
         let row_element = document.createElement("tr")
         let item_element = document.createElement("th")
         let qty_element = document.createElement("td")
@@ -140,16 +154,107 @@ function renderCheckOut(){
         let unit_element = document.createElement("td")
         let amount_element = document.createElement("td")
         let modify_element = document.createElement("td")
+        let plus_button = document.createElement("Button")
+        let minus_button = document.createElement("Button")
 
-        let item_element_text = document.createTextNode(count)
-        let qty_element_text = document.createTextNode()
-        let desc_element_text = document.createTextNode()
-        let unit_element_text = document.createTextNode()
-        let amount_element_text = document.createTextNode()
-        let modify_element_text = document.createTextNode()
+        let item_element_text = document.createTextNode(product.item)
+        let qty_element_text = document.createTextNode(product.qty)
+        let desc_element_text = document.createTextNode(product.prod.name)
+        let unit_element_text = document.createTextNode(product.prod.price)
+        let amount_element_text = document.createTextNode( Math.round(product.prod.price*product.qty*100)/100)
 
+        total = total + (product.prod.price*product.qty)
+
+        plus_button.innerHTML="+"
+        minus_button.innerHTML="-"
+        plus_button.classList.add("checkout-button")
+        minus_button.classList.add("checkout-button")
+
+        plus_button.onclick = () =>{
+            addProductToCart(product.prod)
+            renderCheckOut()
+        }
+
+        minus_button.onclick = () =>{
+            removeProductFromCart(product.prod)
+            renderCheckOut()
+        }
+
+        item_element.appendChild(item_element_text)
+        qty_element.appendChild(qty_element_text)
+        desc_element.appendChild(desc_element_text)
+        unit_element.appendChild(unit_element_text)
+        amount_element.appendChild(amount_element_text)
+        modify_element.appendChild(plus_button)
+        modify_element.appendChild(minus_button)
+
+        row_element.appendChild(item_element)
+        row_element.appendChild(qty_element)
+        row_element.appendChild(desc_element)
+        row_element.appendChild(unit_element)
+        row_element.appendChild(amount_element)
+        row_element.appendChild(modify_element)
+        
+        table_body.appendChild(row_element)
     });
+    document.getElementById("PrecioTotal").innerHTML = "Total:$" + Math.round(total*100)/100
 }
 
-function summarizeOrder(){
+function summarizeOrder(products_cart){
+    let products = Array();
+    let summary = Array()
+    data_json.forEach((element) => {
+        element.products.forEach((prod) =>{
+            products.push(prod)
+        });
+    });
+    let item_id = 0
+    products.forEach(prod =>{
+       let qty_item = products_cart.filter(x=> x== prod).length
+       if(qty_item >0){
+           item_id++;
+           summary.push({item:item_id,prod:prod,qty:qty_item})
+       }
+    });
+    return summary
+}
+
+const popup = document.querySelector('.popup-wrapper');
+const close = document.querySelector('.popup-close');
+const orderCancelBtn = document.getElementById("CanelConfirmationBtn");
+const orderContinueBtn = document.getElementById("OrderContinueBtn");
+
+orderCancelBtn.onclick = () =>{
+    products_cart = Array();
+    num_products_cart = 0;
+    document.getElementById("ItemCounter").innerHTML = "";
+    popup.style.display = 'none';
+    renderMenu(0);
+};
+
+orderContinueBtn.onclick = () =>{
+    popup.style.display = 'none';
+};
+
+document.getElementById("OrderCancelButton").addEventListener('click', () => {
+    popup.style.display = 'block';
+});
+
+close.addEventListener('click', () => {
+    popup.style.display = 'none';
+});
+ 
+popup.addEventListener('click', e => {
+    if(e.target.className === 'popup-wrapper') {
+        popup.style.display = 'none';
+    }
+});
+
+document.getElementById("OrderConfirmationButton").onclick = () =>{
+    let summary = summarizeOrder(products_cart)
+    let output = Array();
+    summary.forEach(element =>{
+        output.push({item: element.item, quantity: element.qty, description:element.prod.name, unitPrice:element.prod.price})
+    });
+    console.log(output)
 }
