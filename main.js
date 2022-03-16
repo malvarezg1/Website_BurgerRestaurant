@@ -90,11 +90,14 @@ function createCard(element, row) {
   card_element.classList.add("card");
   card_image.classList.add("card-img-top");
   card_body.classList.add("card-body");
+  card_body.classList.add("d-flex");
+  card_body.classList.add("flex-column");
   card_title.classList.add("card-title");
   card_title.classList.add("text-center");
   card_content.classList.add("card-text");
   card_button.classList.add("btn");
   card_button.classList.add("card-button");
+  card_button.classList.add("mt-auto");
   card_button.onclick = () => {
     addProductToCart(element);
   };
