@@ -1,85 +1,132 @@
-h1{
-    font-family: 'Rochester', cursive;
+h1 {
+  font-family: "Rochester", cursive;
 }
-.nav-item{
-    color: white;
-    padding-top: 1em;
-    padding-left: 2em;
-    padding-bottom: 1em;   
-} 
-
-.product-row{
-    padding-top:30px;
+.nav-item {
+  color: white;
+  padding-top: 1em;
+  padding-left: 2em;
+  padding-bottom: 1em;
 }
 
-.card_col{
-    margin-bottom: 1em;
-}
-.card{
-    height: 100%; 
-  }
-
-.card-img-top{
-    padding: 20px;
-    height: 200px;
-    object-fit: cover;
-}
-.card-button{
-    color: black;
-    border-color: #CCCCCC;
-    background-color: #F2A950;
-    border-radius: 0px;
-    margin-left: 25%;
-    margin-right: 25%;
+.product-row {
+  padding-top: 30px;
 }
 
-.checkout-button{
-    font-size: 20px;
-    color: white;
-    background-color: #F2A950;
-    width: 40px;
-    height: 40px;
-    margin-right: 1em;
+.card_col {
+  margin-bottom: 1em;
+}
+.card {
+  height: 100%;
 }
 
-hr { width:100%; height:7px; background: black}
-
-
-
-#cart{
-    padding-top: 1em;
-    width: 50px;
-    height: 50px;
+.card-img-top {
+  padding: 20px;
+  height: 200px;
+  object-fit: cover;
+}
+.card-button {
+  color: black;
+  border-color: #cccccc;
+  background-color: #f2a950;
+  border-radius: 0px;
+  margin-left: 25%;
+  margin-right: 25%;
 }
 
-#ItemCounter{
-    margin-top: 25px;
-}
-#Banner{
-    height: 400px;
-    object-fit: cover;
-    padding: 0px;
-}
-
-#MenuHeaderContainer{
-    border-color: white white black white ;
+.checkout-button {
+  font-size: 20px;
+  color: white;
+  background-color: #f2a950;
+  width: 40px;
+  height: 40px;
+  margin-right: 1em;
 }
 
-#ContactInfo{
-    padding-top: 2em;
+hr {
+  width: 100%;
+  height: 7px;
+  background: black;
 }
 
-#CanelConfirmationBtn{
-    margin-top: 1em;
-    max-width: 50%;
+#cart {
+  padding-top: 1em;
+  width: 50px;
+  height: 50px;
 }
 
-#OrderContinueBtn{
-    margin-top: 1em;
-    max-width: 60%;
+#ItemCounter {
+  margin-top: 25px;
+}
+#Banner {
+  height: 400px;
+  object-fit: cover;
+  padding: 0px;
+}
+
+#MenuHeaderContainer {
+  border-color: white white black white;
+}
+
+#ContactInfo {
+  padding-top: 2em;
+}
+
+#CanelConfirmationBtn {
+  margin-top: 1em;
+  max-width: 50%;
+}
+
+#OrderContinueBtn {
+  margin-top: 1em;
+  max-width: 60%;
 }
 
 .popup-wrapper {
+  display: none;
+  background: rgba(0, 0, 0, 0.5);
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.popup {
+  width: 100%;
+  max-width: 600px;
+  background: white;
+  margin: 10% auto;
+  padding: 20px;
+  position: relative;
+}
+
+.navabar-custom {
+  background-color: #333a40;
+}
+
+#SelectedItem {
+  display: none;
+}
+
+.mobile-delete {
+  display: none;
+}
+
+#arrow-menu {
+  color: black;
+  width: 30px;
+}
+
+@media only screen and (max-width: 600px) {
+  .navabar-custom {
+    background-color: #f2a950;
+  }
+
+  #SelectedItem {
+    display: block;
+  }
+
+  .popup-wrapper {
     display: none;
     background: rgba(0, 0, 0, 0.5);
     position: fixed;
@@ -87,66 +134,29 @@ hr { width:100%; height:7px; background: black}
     left: 0;
     width: 100%;
     height: 100%;
-}
- 
-.popup {
+  }
+
+  .popup {
     width: 100%;
-    max-width: 600px;
+    max-width: 300px;
+    height: 500px;
     background: white;
     margin: 10% auto;
     padding: 20px;
     position: relative;
-}
- 
+  }
 
-.navabar-custom{
-    background-color    : #333A40;
-}
+  #CanelConfirmationBtn {
+    margin-top: 5em;
+  }
 
-#SelectedItem{
-    display: none;
-}
-
-.mobile-delete{
-    display: none;
-}
-
-#arrow-menu{
-    color: black;
-    width: 30px;
-}
-
-@media only screen and (max-width: 600px) {
-
-    .navabar-custom{
-        background-color    : #F2A950;
-    }
-
-    #SelectedItem{
-        display: block;
-    }
-
-    .popup-wrapper {
-        display: none;
-        background: rgba(0, 0, 0, 0.5);
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-    }
-     
-    .popup {
-        width: 100%;
-        max-width: 300px;
-        height: 500px;
-        background: white;
-        margin: 10% auto;
-        padding: 20px;
-        position: relative;
-    }
-
-    #CanelConfirmationBtn{
-        margin-top: 5em;
-    }
+  .checkout-button {
+    font-size: 20px;
+    color: white;
+    background-color: #f2a950;
+    width: 40px;
+    height: 40px;
+    margin-right: 0em;
+  }
+  
 }

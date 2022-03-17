@@ -161,66 +161,125 @@ function renderCheckOut() {
   document.getElementById("MenuContainer").innerHTML = "";
   document.getElementById("CheckoutContainer").style.display = "";
 
-  let table_body = document.getElementById("OrderTableBody");
-  table_body.innerHTML = "";
+
 
   let order_summary = summarizeOrder(products_cart);
-  let total = 0;
-  order_summary.forEach((product) => {
-    let row_element = document.createElement("tr");
-    let item_element = document.createElement("th");
-    let qty_element = document.createElement("td");
-    let desc_element = document.createElement("td");
-    let unit_element = document.createElement("td");
-    let amount_element = document.createElement("td");
-    let modify_element = document.createElement("td");
-    let plus_button = document.createElement("Button");
-    let minus_button = document.createElement("Button");
+  renderTable(order_summary)
+}
 
-    let item_element_text = document.createTextNode(product.item);
-    let qty_element_text = document.createTextNode(product.qty);
-    let desc_element_text = document.createTextNode(product.prod.name);
-    let unit_element_text = document.createTextNode(product.prod.price);
-    let amount_element_text = document.createTextNode(
-      Math.round(product.prod.price * product.qty * 100) / 100
-    );
+function renderTable(order_summary){
+    if (window.matchMedia("(min-width: 425px)").matches) {
+        let table_body = document.getElementById("OrderTableBodyWeb");
+        table_body.innerHTML = "";
+        let total = 0;
+        /* La pantalla tiene al menos 400 píxeles de ancho */
+        order_summary.forEach((product) => {
+            let row_element = document.createElement("tr");
+            let item_element = document.createElement("th");
+            let qty_element = document.createElement("td");
+            let desc_element = document.createElement("td");
+            let unit_element = document.createElement("td");
+            let amount_element = document.createElement("td");
+            let modify_element = document.createElement("td");
+            let plus_button = document.createElement("Button");
+            let minus_button = document.createElement("Button");
+        
+            item_element.className = ""
+        
+            let item_element_text = document.createTextNode(product.item);
+            let qty_element_text = document.createTextNode(product.qty);
+            let desc_element_text = document.createTextNode(product.prod.name);
+            let unit_element_text = document.createTextNode(product.prod.price);
+            let amount_element_text = document.createTextNode(
+              Math.round(product.prod.price * product.qty * 100) / 100
+            );
+        
+            total = total + product.prod.price * product.qty;
+        
+            plus_button.innerHTML = "+";
+            minus_button.innerHTML = "-";
+            plus_button.classList.add("checkout-button");
+            minus_button.classList.add("checkout-button");
+        
+            plus_button.onclick = () => {
+              addProductToCart(product.prod);
+              renderCheckOut();
+            };
+        
+            minus_button.onclick = () => {
+              removeProductFromCart(product.prod);
+              renderCheckOut();
+            };
+        
+            item_element.appendChild(item_element_text);
+            qty_element.appendChild(qty_element_text);
+            desc_element.appendChild(desc_element_text);
+            unit_element.appendChild(unit_element_text);
+            amount_element.appendChild(amount_element_text);
+            modify_element.appendChild(plus_button);
+            modify_element.appendChild(minus_button);
+        
+            row_element.appendChild(item_element);
+            row_element.appendChild(qty_element);
+            row_element.appendChild(desc_element);
+            row_element.appendChild(unit_element);
+            row_element.appendChild(amount_element);
+            row_element.appendChild(modify_element);
+        
+            table_body.appendChild(row_element);
+          });
+          document.getElementById("PrecioTotal").innerHTML =
+          "Total:$" + Math.round(total * 100) / 100;
+      } else {
+        /* La pantalla tiene menos de 400 píxeles de ancho */
+        let table_body = document.getElementById("OrderTableBodyMobile");
+        table_body.innerHTML = "";
+        let total = 0;
+        /* La pantalla tiene al menos 400 píxeles de ancho */
+        order_summary.forEach((product) => {
+            let row_element = document.createElement("tr");
+            let qty_element = document.createElement("td");
+            let desc_element = document.createElement("td");
+            let modify_element = document.createElement("td");
+            let plus_button = document.createElement("Button");
+            let minus_button = document.createElement("Button");
+    
+            let qty_element_text = document.createTextNode(product.qty);
+            let desc_element_text = document.createTextNode(product.prod.name);
+            row_element.classList.add("table-active")
+            total = total + product.prod.price * product.qty;
+        
+            plus_button.innerHTML = "+";
+            minus_button.innerHTML = "-";
+            plus_button.classList.add("checkout-button");
+            minus_button.classList.add("checkout-button");
+        
+            plus_button.onclick = () => {
+              addProductToCart(product.prod);
+              renderCheckOut();
+            };
+        
+            minus_button.onclick = () => {
+              removeProductFromCart(product.prod);
+              renderCheckOut();
+            };
+        
+            qty_element.appendChild(qty_element_text);
+            desc_element.appendChild(desc_element_text);
+            modify_element.appendChild(plus_button);
+            modify_element.appendChild(minus_button);
+        
+            row_element.appendChild(qty_element);
+            row_element.appendChild(desc_element);
+            row_element.appendChild(modify_element);
+        
+            table_body.appendChild(row_element);
+          });
+          document.getElementById("PrecioTotal").innerHTML =
+          "Total:$" + Math.round(total * 100) / 100;
 
-    total = total + product.prod.price * product.qty;
 
-    plus_button.innerHTML = "+";
-    minus_button.innerHTML = "-";
-    plus_button.classList.add("checkout-button");
-    minus_button.classList.add("checkout-button");
-
-    plus_button.onclick = () => {
-      addProductToCart(product.prod);
-      renderCheckOut();
-    };
-
-    minus_button.onclick = () => {
-      removeProductFromCart(product.prod);
-      renderCheckOut();
-    };
-
-    item_element.appendChild(item_element_text);
-    qty_element.appendChild(qty_element_text);
-    desc_element.appendChild(desc_element_text);
-    unit_element.appendChild(unit_element_text);
-    amount_element.appendChild(amount_element_text);
-    modify_element.appendChild(plus_button);
-    modify_element.appendChild(minus_button);
-
-    row_element.appendChild(item_element);
-    row_element.appendChild(qty_element);
-    row_element.appendChild(desc_element);
-    row_element.appendChild(unit_element);
-    row_element.appendChild(amount_element);
-    row_element.appendChild(modify_element);
-
-    table_body.appendChild(row_element);
-  });
-  document.getElementById("PrecioTotal").innerHTML =
-    "Total:$" + Math.round(total * 100) / 100;
+      }
 }
 
 /**  Funcion para procesar elementos en el carrito de compra y generar resumen */
