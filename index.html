@@ -14,6 +14,7 @@
   </head>
   <body>
       <div class= "container-fluid">
+            <!-- Titulo y Carrito -->
             <div class="row">
                 <div class="col-8 col-lg-1 order-lg-2 d-flex justify-content-end">
                     <svg id="cart" xmlns="http://www.w3.org/2000/svg"  fill="currentColor" class="bi bi-cart4" viewBox="0 0 16 16">
@@ -27,9 +28,11 @@
                 </div>
             </div>
             <hr>
+            <!-- Banner -->
             <div class="row">
                 <img class="img-fluid d-none d-sm-block" id="Banner" alt="Hamburger" src="https://s3-alpha-sig.figma.com/img/40ec/3ac4/43efc65dbdbfe77000d6db1a2a100c90?Expires=1648425600&Signature=BWrFVmeQj7ynwjf4zpabnRGkjLHXooJ642Qfu34Q7Qf4Ja8DatnLLer96nhBbSnEyJM9DeJhw97FciSbtO-3c8xu7WqEmsMa2tWLL9-XhBNKRjI3BsusG64oMVFvGwaGH0ixq~O8CAcV700Lv8RHLFIVcNGltUCS0Wm3hfB3gkZoDuXCR7Hd~8kIfAta2rA6BTMSgXSVUZOWIRfKRJYU9gwIJMheUPh8npJ5NQC0~glw3xXrDZkeXFOWofJkAQdNkH0VraIpUwCW5DAVUO3wUWGPQ2z3yof3yqiu4zpXb61XugKkUbjzvpld9Zq6BCTQrWGyLzXfvtJwuaDSrkbPPg__&Key-Pair-Id=APKAINTVSUGEWH5XD5UA">
             </div>
+            <!-- Navabar -->
             <div class="row">
                 <nav class="navbar navbar-expand-lg navbar-dark  navabar-custom" id="MyNavbar">
                     <div class="container-fluid">
@@ -48,40 +51,48 @@
         </div>
         
         <div class="container">
+            <!-- Header de seccion -->
             <div class="row" id="MenuHeaderContainer">
                 <h2 class="text-center" id="MenuHeader"></h2>
                 <hr />
             </div>
+            <!-- Contenedora de productos -->
             <div id="MenuContainer">
 
             </div>
+            <!-- Seccion de Checkout -->
             <div id="CheckoutContainer">
-                <div class="row">            
+                <div class="row">   
+                    <!-- Tabla de checkout -->
+                    <div class="table-responsive">     
                     <table class="table table-striped" id="OrderTable">
                     <thead>
                       <tr>
-                        <th scope="col">Item</th>
-                        <th scope="col">Qty.</th>
-                        <th scope="col">Description</th>
-                        <th scope="col">Unit price</th>
-                        <th scope="col">Amount</th>
-                        <th scope="col">Modify</th>
+                        <th class="col">Item</th>
+                        <th class="col">Qty.</th>
+                        <th class="col">Description</th>
+                        <th class="col">Unit price</th>
+                        <th class="col">Amount</th>
+                        <th class="col">Modify</th>
                       </tr>
                     </thead>
                     <tbody id="OrderTableBody">
                     </tbody>
                   </table>
+                </div>    
                 </div>
+                <!-- Botones de confirmacion -->
                 <div class="row">
-                    <div class="col-1 col-lg-8">
+                    <div class="col-12 col-lg-8">
                         <p><strong id="PrecioTotal"></strong></p>
                     </div>
-                    <div class="col-11 col-lg-4">
+                    <div class="col-12 col-lg-4">
                         <button class="btn btn-danger" id ="OrderCancelButton"> Cancel Order </button> 
                         <button class="btn btn-success" id ="OrderConfirmationButton"> Confirm Order</button> 
                     </div>
                 </div> 
             </div>
+            <!-- Botones de confirmacion -->
             <div class="popup-wrapper">
                 <div class="popup">
                     <div class="popup-close">x</div>
@@ -89,14 +100,17 @@
                         <div class="row">
                             <h2>Cancel the order</h3>
                             <p>Are you sure about cancelling the order?</p>
+                        </div>
+                        <div class="row justify-content-end">
                             <button class="btn btn-success" id ="CanelConfirmationBtn"> Yes, I want to cancel the order</button>
                         </div>
-                        <div class="row">
+                        <div class="row justify-content-end">
                             <button class="btn btn-danger" id ="OrderContinueBtn"> No , I want to continue adding buttons</button> 
                         </div>
                     </div>
                 </div>
             </div>
+            <!-- Información de contacto -->
             <p id ="ContactInfo" class="text-center"><strong>Contact us: +57 3102171020 - info@restaurant.com  - @restaurant</strong> </p>
         </div>  
     <script src="main.js"></script>

@@ -1,3 +1,4 @@
+/** Variables importantes para la ejecucion */
 let url =
   "https://gist.githubusercontent.com/josejbocanegra/9a28c356416badb8f9173daf36d1460b/raw/5ea84b9d43ff494fcbf5c5186544a18b42812f09/restaurant.json";
 let data_json;
@@ -6,10 +7,14 @@ let categoriesListenes = Array();
 let products_cart = Array();
 let num_products_cart = 0;
 
+/** Evento para volver al menu principal */
 const logo = document.querySelector("h1").onclick = () =>{
+    document.getElementById("MenuContainer").innerHTML = "";
     renderMenu(0);
 };
 
+
+/** Primera  renderizacion */
 recoverData(url, (data) => {
   data_json = data;
   renderCatergories(data_json);
@@ -17,12 +22,15 @@ recoverData(url, (data) => {
   renderMenu(0);
 });
 
+/** Funcion asincrona para carga de datos */
 function recoverData(url, callback) {
   fetch(url)
     .then((response) => response.json())
     .then((json) => callback(json));
 }
 
+
+/** Funcion para renderivar menu de navegacion segun datos */
 function renderCatergories(json) {
   json.forEach((cat) => {
     let categories = document.getElementById("CategoriesList");
@@ -36,6 +44,7 @@ function renderCatergories(json) {
   });
 }
 
+/** signacion de eventos a barra de navegacion */
 function setListenersCategories() {
   for (let i = 0; i < categories_number; i++) {
     categoriesListenes.push(
@@ -47,6 +56,7 @@ function setListenersCategories() {
   }
 }
 
+/** Funcion para renderizar el menu */
 function renderMenu(index) {
   document.getElementById("MenuHeader").innerHTML = data_json[index].name;
   document.getElementById("SelectedItem").innerHTML = data_json[index].name;
@@ -69,7 +79,8 @@ function renderMenu(index) {
   });
 }
 
-function createCard(element, row) {
+/** Funcion para creat una unica carta*/
+function createCard(element) {
   let column = document.createElement("div");
   let card_element = document.createElement("div");
   let card_image = document.createElement("img");
@@ -123,12 +134,14 @@ function createCard(element, row) {
   return column;
 }
 
+/** Añadir un producto al carrito de compra */
 function addProductToCart(product) {
   num_products_cart++;
   products_cart.push(product);
   document.getElementById("ItemCounter").innerHTML = num_products_cart + " Items";
 }
 
+/** Remover un producto al carrito de compra */
 function removeProductFromCart(product){
     let removed =products_cart.splice(products_cart.indexOf(product),1)
     if(removed){
@@ -137,10 +150,12 @@ function removeProductFromCart(product){
     }
 }
 
+/** Evento sobre el carro de compra para iniciar el checkout */
 document.getElementById("cart").onclick = () =>{
 renderCheckOut()
 }
 
+/** Funcion para renderizar el checkout*/
 function renderCheckOut(){
     document.getElementById("MenuHeader").innerHTML="ORDER DETAIL"
     document.getElementById("MenuContainer").innerHTML=""
@@ -205,6 +220,7 @@ function renderCheckOut(){
     document.getElementById("PrecioTotal").innerHTML = "Total:$" + Math.round(total*100)/100
 }
 
+/**  Funcion para procesar elementos en el carrito de compra y generar resumen */
 function summarizeOrder(products_cart){
     let products = Array();
     let summary = Array()
@@ -224,6 +240,7 @@ function summarizeOrder(products_cart){
     return summary
 }
 
+/** Eventos de los botones en el checkout */
 const popup = document.querySelector('.popup-wrapper');
 const close = document.querySelector('.popup-close');
 const orderCancelBtn = document.getElementById("CanelConfirmationBtn");
